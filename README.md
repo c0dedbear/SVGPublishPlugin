@@ -38,6 +38,7 @@ try YourWebSite().publish(
 
 ```
 ☝Note that if your svg files not placed  in the **"Resources/svg"**, you must use '**folderPath**' parameter of '**.svgPlugin**' method. 
+
 ⚠️ There must be at least one file with .svg extension, in other case publish will throw an error on the install plugin step. 
 
 3.  Use within **.svg** node like this:
@@ -71,8 +72,11 @@ func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HT
 ```
 
 .**width** and **height** - size of svg into pixels. 
+
 .**classString** - stylesheet's class name string
+
 .**class** - StrongTypedCSS conformed class (see more on <a href="https://github.com/c0dedbear/StrongTypedCSSPublishPlugin">https://github.com/c0dedbear/StrongTypedCSSPublishPlugin</a>)
+
 .**classes** - array of  StrongTypedCSS-conformed cases
 
 5. For a more convenience usage, I recommend to create an enum conformed to **SVGFileNameCase** protocol,  which contains names of the svg files in your folder. And use it this way:
