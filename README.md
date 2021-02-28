@@ -52,7 +52,7 @@ func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HT
 			.header(for: context, selectedSection: nil),
 			.a(
 			   .class(CSS.footerSectionTitle),
-			   // Note that file`rss.svg` placed on folder path typed when installing plugin.
+			   // File named `rss.svg` placed on folder path typed when installing plugin.
 			   .svg("rss"),
 			   .text("RSS feed"),
 			   .href(Path.defaultForRSSFeed),
@@ -70,10 +70,10 @@ func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HT
 ...
 ```
 
-.**width** and height - size of svg into pixels. 
+.**width** and **height** - size of svg into pixels. 
 .**classString** - stylesheet's class name string
 .**class** - StrongTypedCSS conformed class (see more on <a href="https://github.com/c0dedbear/StrongTypedCSSPublishPlugin">https://github.com/c0dedbear/StrongTypedCSSPublishPlugin</a>)
-.**clasees** - array of  StrongTypedCSS-conformed cases
+.**classes** - array of  StrongTypedCSS-conformed cases
 
 5. For a more convenience usage, I recommend to create an enum conformed to **SVGFileNameCase** protocol,  which contains names of the svg files in your folder. And use it this way:
 
