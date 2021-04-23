@@ -23,7 +23,11 @@ final class SVGFileManager {
 		guard let svgContent = self.cache[fileName] else {
 			fatalError("🔴 There is no content for \(fileName)")
 		}
-		return .selfClosedElement(named: self.setParameters(parameters, in: svgContent))
+		return .raw(self.setParameters(parameters, in: svgContent))
+	}
+
+	func svg<Context>(_ content: String, params: [SVGAttribute]) -> Node<Context> {
+		return .raw(self.setParameters(params, in: content))
 	}
 
 	/// In memory cache for better performance
@@ -42,6 +46,12 @@ private extension SVGFileManager {
 		let separator = " "
 		var components = content.components(separatedBy: separator)
 
+		guard let beginOfSvg = components.first(where: { $0.contains("<svg")}),
+			  let beginIndex = components.firstIndex(of: beginOfSvg)
+			  else { fatalError("🔴 There is SVG tag found") }
+
+		let insertIndex = components.index(after: beginIndex)
+
 		for param in parameters {
 			if param.isNeedToReplace,
 			   let index = components.firstIndex(where: { $0.hasPrefix(param.attributeName + "=") }) {
@@ -50,28 +60,19 @@ private extension SVGFileManager {
 
 			switch param {
 			case let .width(value):
-				components.insert("\(param.attributeName)=\"\(value)\"", at: 1)
+				components.insert("\(param.attributeName)=\"\(value)\"", at: insertIndex)
 			case let .height(value):
-				components.insert("\(param.attributeName)=\"\(value)\"", at: 1)
+				components.insert("\(param.attributeName)=\"\(value)\"", at: insertIndex)
 			case let .classes(cssClasses):
 				let string = cssClasses.map { $0.rawValue }.joined(separator: " ")
-				components.insert("\(param.attributeName)=\"\(string)\"", at: 1)
+				components.insert("\(param.attributeName)=\"\(string)\"", at: insertIndex)
 			case let .classString(string):
-				components.insert("\(param.attributeName)=\"\(string)\"", at: 1)
+				components.insert("\(param.attributeName)=\"\(string)\"", at: insertIndex)
 			case let .class(value):
-				components.insert("\(param.attributeName)=\"\(value.rawValue)\"", at: 1)
+				components.insert("\(param.attributeName)=\"\(value.rawValue)\"", at: insertIndex)
 			}
 		}
 
-		var output = components.joined(separator: separator)
-
-		// Removing brackets for .selfClosedElement using
-		let firstBracketIndex = output.firstIndex(of: "<")!
-		output.remove(at: firstBracketIndex)
-
-		let lastBracketIndex = output.lastIndex(of: ">")!
-		output.remove(at: lastBracketIndex)
-
-		return output
+		return components.joined(separator: separator)
 	}
 }
