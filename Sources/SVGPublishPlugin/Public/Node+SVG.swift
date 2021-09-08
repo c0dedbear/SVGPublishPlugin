@@ -4,7 +4,7 @@
 *  MIT license, see LICENSE file for details
 **/
 
-import enum Plot.Node
+import struct Plot.Node
 
 public protocol SVGFileNameCase: RawRepresentable {
 	var rawValue: String { get }
