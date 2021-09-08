@@ -100,5 +100,5 @@ enum SVG: String, SVGFileNameCase {
 ```
 
 # Author
-<img src="authorlogo.png" alt="logo"/> Mikhail Medvedev | http://bearlogs.ru
+<img src="authorlogo.png" alt="logo"/> Mikhail Medvedev | https://bearlogs.ru
 
