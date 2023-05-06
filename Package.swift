@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [
 		.package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.8.0"),
-		.package(url: "https://github.com/c0dedbear/StrongTypedCSSPublishPlugin", from: "0.1.0")
+		.package(url: "https://github.com/c0dedbear/StrongTypedCSSPublishPlugin", from: "0.1.1")
     ],
     targets: [
 		.target(
