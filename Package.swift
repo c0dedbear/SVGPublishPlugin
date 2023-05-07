@@ -1,4 +1,4 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.5
 
 /**
 *  SVGPlugin plugin for Publish
@@ -10,6 +10,7 @@ import PackageDescription
 
 let package = Package(
     name: "SVGPublishPlugin",
+    platforms: [.macOS(.v12)],
     products: [
         .library(
             name: "SVGPublishPlugin",
@@ -18,7 +19,7 @@ let package = Package(
     ],
     dependencies: [
 		.package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.8.0"),
-		.package(url: "https://github.com/c0dedbear/StrongTypedCSSPublishPlugin", from: "0.1.0")
+		.package(url: "https://github.com/c0dedbear/StrongTypedCSSPublishPlugin", from: "0.1.1")
     ],
     targets: [
 		.target(
